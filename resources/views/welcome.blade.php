@@ -1,99 +1,47 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Laravel</title>
+@section('content')
+<div align="center">
+                                                         
+    <div text-align="center">
+        <div class="content-select col-sm-4">
+            <select name="catid" id="catid" class="form-control">
+                <option value="">Seleccione una Categoria</option>
+                @foreach ($cats as $cat)
+                    <option value="{{ $cat->id}}">{{ $cat->name}}</option>
+                @endforeach
+            </select>
+            <img src="{{ asset('imgs/loading.gif') }}" class="loader mt-5 d-none" height="100px">
+            <i></i>
+        </div>
+    </div><br>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+<div class="container" id="content">
+    @csrf
+        <div class="container-fluid" style="margin-top:20px;">
+            <div class="container">
+                @foreach ($cats as $cat)
+                <div class="card col-sm-8">   
+                  <div class="card-body">
+                    <img src="{{ asset($cat->image) }}" class="img-thumbnail" width="80px" height="80px">
+                    <label class="text-capitalize font-weight-bold" style="font-size: 1.5rem;">{{ $cat->name }}</label>
+                  </div>
+                    <div class="tab-content" id="pills-tabContent">
+                        @foreach ($artsbycats as $abc)
+                            @if ($abc->category_id == $cat->id)
+                                <div class="tab-pane fade show active" id="showall" role="tabpanel" aria-labelledby="showall-tab">
+                                    <div class="card-body"><img src="{{asset($abc->image)}}" style="width: 80px"><div class="desc">{{$abc->description}}</div></div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div> 
+                @endforeach
             </div>
         </div>
-    </body>
-</html>
+</div>
+@endsection
+

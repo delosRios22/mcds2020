@@ -154,7 +154,20 @@
                 reader.readAsDataURL(this.files[0]);
             });
             // -----------------------------------------------
+            $('.btn-excel').click(function(event){
+                $('#file').click();
         });
+
+            $("#file").change(function(){
+                    $("#formImportar").submit();
+                });
+
+            });
+
+            $('body').on('change', '#catid', function(event) {
+                event.preventDefault();
+                $cid = $(this).val();
+            });
     </script>
 </body>
 </html>

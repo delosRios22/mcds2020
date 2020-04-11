@@ -14,10 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Get: URL/URI
-Route::get('helloworld', function() {
-	return dd('Hola Mundo Laravel');
-});
+
 // Resource: Crea Automaticamente todas la rutas
 // Route::resource('Article', 'ArticleController');
 
@@ -61,3 +58,6 @@ Route::get('generate/pdf/categories', 'CategoryController@pdf');
  Route::get('generate/pdf/articles', 'ArticleController@pdf');
  Route::get('generate/excel/articles', 'ArticleController@excel');
 
+//Ruta de Welcome
+Route::resource('/', 'WelcomeController');
+Route::post('loadcat', 'WelcomeController@loadcat');

@@ -151,7 +151,7 @@ class UserController extends Controller
     public function importExcel(Request $request) 
     {
         $file= $request->file('file');
-        Excel::import(new UsersImport, $file);   //importar lo que contengas la variable file
+        \Excel::import(new UsersImport, $file);   //importar lo que contengas la variable file
         return redirect('users')->with('message', 'Importación de usuarios con éxito');
       
     }

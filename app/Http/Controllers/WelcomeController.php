@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Article;
+use App\Category;
 
 use Illuminate\Http\Request;
 
@@ -20,12 +22,32 @@ class WelcomeController extends Controller
         // $cat= Category::find($art->category_id);
         // return view('articles.show')->with('art', $art)->with('usr', $usr)->with('cat', $cat);
 
-        $cats= Category::find($id);
-        $article= Article::all();
-        $art->user_id= Auth::user()->id;
-        $cats= Category::all();
-        return view('welcome',compact('cats'))->with('articles',$article);
+        $arts         = Article::orderBy('id', 'desc')->take(5)->get();
+        $cats         = Category::all();
+        $artsbycats   = Article::all();
+        return view('welcome')->with('arts',$arts)
+                              ->with('cats', $cats)
+                              ->with('artsbycats', $artsbycats);
+
     }
+
+    public function loadcat(Request $request)
+    {
+        if($request->cid == 0) {
+            $cats        = Category::all();
+            $artsbycats  = Article::all(); 
+            return view('loadcat')->with('cats', $cats)
+                                  ->with('artsbycats', $artsbycats);
+        } 
+        else 
+        {
+            $cat        = Category::where('id', $request->cid)->first();
+            $artsbycats = Article::where('category_id', $request->cid)->get();
+            return view('loadcat')->with('cat', $cat)
+                                  ->with('artsbycats', $artsbycats);
+        } 
+    }
+
 
     /**
      * Show the form for creating a new resource.
