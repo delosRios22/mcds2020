@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\UserRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 
 class UserController extends Controller
 {
@@ -137,4 +140,20 @@ class UserController extends Controller
         $pdf = \PDF::loadView('users.pdf', compact('users'));
         return $pdf->download('users.pdf');
     }
+
+    public function excel(){
+        // $users= user::all();
+        return \Excel::download(new UsersExport, 'users.xlsx');
+        
+    }
+
+
+    public function importExcel(Request $request) 
+    {
+        $file= $request->file('file');
+        Excel::import(new UsersImport, $file);   //importar lo que contengas la variable file
+        return redirect('users')->with('message', 'Importación de usuarios con éxito');
+      
+    }
+
 }

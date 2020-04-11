@@ -64,6 +64,20 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="description" class="text-md-right">Descripción Articulo</label>
+                            
+                            <!-- <textarea class="form-control" id="description" rows="3"></textarea> -->
+                            
+                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description" autofocus>
+
+                            @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="user" class="text-md-right">Usuario</label>
 
                             <input id="user" type="text" class="form-control @error('user') is-invalid @enderror" name="user" value="{{ $user->fullname }}" autocomplete="user" autofocus disabled="true">
@@ -85,21 +99,7 @@
                                 </span>
                             @enderror
                         </div>
-
-
-                        <div class="form-group">
-                            <label for="description" class="text-md-right">Descripción Articulo</label>
-                            
-                            <!-- <textarea class="form-control" id="description" rows="3"></textarea> -->
-                            
-                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description" autofocus>
-
-                            @error('description')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                        
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-indigo btn-block">

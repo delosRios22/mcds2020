@@ -14,6 +14,10 @@
             <i class="fa fa-file-pdf"></i> 
             Generar PDF
           </a>
+          <a href="{{ url('generate/excel/users') }}" class="btn btn-success">
+            <i class="fa fa-file-excel"></i> 
+            Generar Excel
+          </a>
           <form action="{{ url('import/excel/users') }}" method="post" enctype="multipart/form-data" style="display: inline-block;">
             @csrf
             <input type="file" class="d-none" id="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">

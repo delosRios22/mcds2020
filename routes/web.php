@@ -49,11 +49,15 @@ Route::resource('categories', 'CategoryController');
 Route::resource('articles', 'ArticleController');
 //Reportes pdf
 Route::get('generate/pdf/users', 'UserController@pdf');
+Route::get('generate/excel/users', 'UserController@excel');
+// Imports Users
+Route::post('import/excel/users', 'UserController@importExcel');
+
+
+//Resouerce Category
 Route::get('generate/pdf/categories', 'CategoryController@pdf');
 
  //pdf articles /excel articles
  Route::get('generate/pdf/articles', 'ArticleController@pdf');
  Route::get('generate/excel/articles', 'ArticleController@excel');
 
-// Imports 
-Route::post('import/excel/users', 'UserController@import');

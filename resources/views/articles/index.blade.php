@@ -14,6 +14,10 @@
             <i class="fa fa-file-pdf"></i> 
             Generar PDF
           </a>
+          <a href="{{ url('generate/excel/articles') }}" class="btn btn-success">
+            <i class="fa fa-file-excel"></i> 
+            Generar Excel
+          </a>
           <br><br>
           
             <table class="table table-striped table-bordered">
