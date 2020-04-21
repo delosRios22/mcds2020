@@ -13,16 +13,19 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Category::create(array(
-        	'name'        => 'Nintendo Switch',
-        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusamus.	'
+            'name'        => 'Nintendo Switch',
+            'image'       => 'imgs/nintendoSwitch.jpg',
+        	'description' => 'Articulos nuevos de la Nintendo Switch.'
         ));
         Category::create(array(
-        	'name'        => 'Play Station 4',
-        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusamus.	'
+            'name'        => 'Wii U',
+            'image'       => 'imgs/wiiU.jpg',
+        	'description' => 'Articulos nuevos de la Nintendo Wii U.	'
         ));
         Category::create(array(
-        	'name'        => 'Xbox One',
-        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusamus.	'
+            'name'        => 'Xbox One',
+            'image'       => 'imgs/xboxOne.jpg',
+        	'description' => 'Articulos nuevos del Xbox One.	'
         ));
     }
 }
