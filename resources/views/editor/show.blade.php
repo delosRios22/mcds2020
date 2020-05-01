@@ -12,7 +12,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('home') }}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('articles') }}">Lista de Articulos</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('myarticles') }}">Mis Articulos</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Consultar Articulo</li>
               </ol>
             </nav>
@@ -29,15 +29,7 @@
                 <tr>
                     <th>Descripción</th>
                     <td>{{ $article->description }}</td>
-                </tr>
-                <tr>
-                    <th>Usuario</th>
-                    <td>{{ $user->fullname }}</td>
-                </tr>        
-                <tr>
-                    <th>Categoría</th>
-                    <td>{{ $cat->name }}</td>
-                </tr>      
+                </tr>    
 
             </table>
             

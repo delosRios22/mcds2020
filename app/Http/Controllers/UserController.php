@@ -8,6 +8,7 @@ use App\Http\Requests\UserRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
+use Auth;
 
 class UserController extends Controller
 {
@@ -154,6 +155,33 @@ class UserController extends Controller
         \Excel::import(new UsersImport, $file);   //importar lo que contengas la variable file
         return redirect('users')->with('message', 'Importación de usuarios con éxito');
       
+    }
+
+    public function mydata(){
+        $id = Auth::user()-> id;
+        $user = User::findOrFail($id);
+
+        return view('users.mydata')->with('user', $user);
+    }
+
+    public function updMyData(UserRequest $request, $id){
+        // dd($id);
+
+        $user = User::find($id);
+        $user->fullname  = $request->fullname;
+        $user->email     = $request->email;
+        $user->phone     = $request->phone;
+        $user->birthdate = $request->birthdate;
+        $user->gender    = $request->gender;
+        $user->address   = $request->address;
+        if ($request->hasFile('photo')) {
+            $file = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('imgs'), $file);
+            $user->photo = 'imgs/'.$file;
+        }
+        if ($user->save()) {
+            return redirect('home')->with('message', 'Sus datos fueron modificados con éxito!');
+        }
     }
 
 }

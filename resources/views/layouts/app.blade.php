@@ -65,7 +65,7 @@
                             @endif
                         @else
 
-                            @if(Auth::user()->role == 'admin')
+                            @if(Auth::user()->role === 'admin')
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -98,12 +98,27 @@
                                         @csrf
                                     </form>
                                 </div>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                                </li>
                                 @else (Auth::user()->role == 'editor')
+                                <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <img src="{{ asset(Auth::user()->photo) }}" class="rounded-circle border border-light" width="50px">
                                     {{ Auth::user()->fullname }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="{{ url('mydata') }}" class="dropdown-item">
+                                        <i class="fa fa-user"></i>
+                                        Mis Datos
+                                    </a>
+                                    <a href="{{ url('myarticles') }}" class="dropdown-item">
+                                        <i class="fa fa-newspaper"></i>
+                                        Mis Articulos
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -118,6 +133,7 @@
                             </li>
                             @endif
                         @endguest
+
                     </ul>
                 </div>
             </div>

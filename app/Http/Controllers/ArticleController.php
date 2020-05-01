@@ -37,7 +37,7 @@ class ArticleController extends Controller
         //
         $user= Auth::user();
         $cats= Category::all();
-        return view('articles.create')->with('user', $user)->with('cats', $cats);
+        return view('articles.create')->with('user', $user)->with('cats', $cats); 
     }
 
     /**
@@ -76,7 +76,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $user= Auth::user();
         $cat= Category::find($article->category_id);
-        return view('articles.show')->with('article', $article)->with('user', $user)->with('cat', $cat);;
+        return view('articles.show')->with('article', $article)->with('user', $user)->with('cat', $cat);
     }
 
     /**
@@ -136,10 +136,18 @@ class ArticleController extends Controller
     }
     
     public function pdf(){
+        
+        if(Auth::user()->role == 'admin'){
+            $articles = Article::paginate(8);
+        }else if(Auth::user()->role == 'editor'){
+            $articles = Article::where('user_id', '=', Auth::user()->id)->paginate(8);
+        }
+
+
         $pdf= \PDF::loadView('articles.pdf', [
             'usrs'=> User::all(),
             'cats'=> Category::all(),
-            'articles'=> Article::all(),
+            'articles'=> $articles,
         ]);
         return $pdf->download('articles.pdf');
      }
@@ -148,5 +156,71 @@ class ArticleController extends Controller
         return \Excel::download(new ArticlesExport, 'articles.xlsx');
     }
 
+    public function myarticles(){
+        $articles = Article::where('user_id', '=', Auth::user()->id)->paginate(10);
+        return view('editor.index')->with('articles', $articles); 
+    }
 
+    public function estore(Request $request)
+    {
+        //
+        $article = new Article;
+        $article->name  = $request->name;
+        $article->category_id= $request->category_id;
+        $article->user_id= Auth::user()->id;
+        $article->description     = $request->description;
+        if($request->hasFile('image')){
+            $file = time().'.'.$request->image->extension();
+            $request->image->move(public_path('imgs'),$file);
+            $article->image = 'imgs/'.$file;
+        }
+        if ($article->save()) {
+            return redirect('editor')->with('message', 'El Articulo: '.$article->name.' fue Adicionado con Exito!');
+        }
+    }
+
+    public function eshow($id)
+    {
+        //
+        $article = Article::find($id);
+        return view('editor.show')->with('article', $article);
+    }
+
+    public function ecreate(){
+        $user= Auth::user();
+        $cats= Category::all();
+        return view('editor.create')->with('user', $user)->with('cats', $cats);
+    }
+
+    //EDITTTT
+    public function eupdate(Request $request, $id)
+    {
+        //
+        $article = Article::find($id);
+        $article->name  = $request->name;
+        if ($request->hasFile('image')) {
+            $file = time().'.'.$request->image->extension();
+            $request->image->move(public_path('imgs'), $file);
+            $article->image = 'imgs/'.$file;
+        }
+        $article->user_id       = Auth::user()->id;
+        $article->category_id   = $request->category;
+        $article->description     = $request->description;
+        if ($article->save()) {
+            return redirect('editor.edit')->with('message', 'El Articulo: '.$article->name.' fue Modificado con Exito!');
+        }
+    }
+
+    public function eedit($id)
+    {
+        //
+        $article = Article::find($id);
+        $user= Auth::user();
+        $cats= Category::all();
+        return view('editor.edit')->with('article', $article)->with('user', $user)->with('cats', $cats);
+    }
+
+
+
+    //FIN EDITTT
 }

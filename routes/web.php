@@ -61,3 +61,16 @@ Route::get('generate/pdf/categories', 'CategoryController@pdf');
 //Ruta de Welcome
 Route::resource('/', 'WelcomeController');
 Route::post('loadcat', 'WelcomeController@loadcat');
+
+//Role Editor datos
+Route::get('mydata', 'UserController@mydata');
+Route::put('mydata/{id}', 'UserController@updMyData');
+
+//Role Editor articulos
+Route::get('myarticles', 'ArticleController@myarticles');
+Route::get('editor/articles/create', 'ArticleController@ecreate');
+Route::get('editor/articles', 'ArticleController@estore');
+Route::get('editor/articles/{id}', 'ArticleController@eshow');
+Route::get('editor/{id}/edit', 'ArticleController@eedit');
+Route::get('generate/pdf/editor/articles', 'ArticleController@pdf');
+ Route::get('generate/excel/editor/articles', 'ArticleController@excel');
