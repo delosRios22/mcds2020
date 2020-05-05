@@ -36,14 +36,21 @@ Route::get('show/user/{id}', function($id) {
 
 
 Auth::routes();
+//middleware admin
+Route::group(['middleware' => 'admin'], function(){
+	// Resources
+	Route::resource('users', 'UserController');
+	Route::resource('categories', 'CategoryController');
+	Route::resource('articles', 'ArticleController');
+});
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-// Resources
-Route::resource('users', 'UserController');
-Route::resource('categories', 'CategoryController');
-Route::resource('articles', 'ArticleController');
+
+
 //Reportes pdf
 Route::get('generate/pdf/users', 'UserController@pdf');
 Route::get('generate/excel/users', 'UserController@excel');
@@ -68,9 +75,13 @@ Route::put('mydata/{id}', 'UserController@updMyData');
 
 //Role Editor articulos
 Route::get('myarticles', 'ArticleController@myarticles');
-Route::get('editor/articles/create', 'ArticleController@ecreate');
-Route::get('editor/articles', 'ArticleController@estore');
+Route::get('editor/create', 'ArticleController@ecreate');
+Route::get('editor/index', 'ArticleController@myarticles');
+Route::post('editor', 'ArticleController@estore');
 Route::get('editor/articles/{id}', 'ArticleController@eshow');
 Route::get('editor/{id}/edit', 'ArticleController@eedit');
+Route::put('editor/{id}', 'ArticleController@eupdate');
+Route::delete('editor/{id}', 'ArticleController@edestroy');
 Route::get('generate/pdf/editor/articles', 'ArticleController@pdf');
  Route::get('generate/excel/editor/articles', 'ArticleController@excel');
+

@@ -175,7 +175,7 @@ class ArticleController extends Controller
             $article->image = 'imgs/'.$file;
         }
         if ($article->save()) {
-            return redirect('editor')->with('message', 'El Articulo: '.$article->name.' fue Adicionado con Exito!');
+            return redirect('editor/index')->with('message', 'El Articulo: '.$article->name.' fue Adicionado con Exito!');
         }
     }
 
@@ -203,11 +203,10 @@ class ArticleController extends Controller
             $request->image->move(public_path('imgs'), $file);
             $article->image = 'imgs/'.$file;
         }
-        $article->user_id       = Auth::user()->id;
-        $article->category_id   = $request->category;
         $article->description     = $request->description;
+        $article->category_id   = $request->category;
         if ($article->save()) {
-            return redirect('editor.edit')->with('message', 'El Articulo: '.$article->name.' fue Modificado con Exito!');
+            return redirect('editor/index')->with('message', 'El Articulo fue Modificado con Exito!');
         }
     }
 
@@ -220,7 +219,12 @@ class ArticleController extends Controller
         return view('editor.edit')->with('article', $article)->with('user', $user)->with('cats', $cats);
     }
 
-
-
-    //FIN EDITTT
+    public function edestroy($id)
+    {
+        //
+        $article = Article::find($id);
+        if($article->delete()){
+            return redirect('editor/index')->with('message', 'El Articulo: '.$article->name.' fue eliminado con Exito!');
+        }
+    }
 }

@@ -174,6 +174,13 @@
                   'success'
                 );
             @endif
+            @if (session('error'))
+                Swal.fire(
+                  'Acceso Denegado',
+                  '{{ session('error') }}',
+                  'error'
+                );
+            @endif
             // -----------------------------------------------
             $('.btn-upload').click(function(event) {
                 $('#photo').click();

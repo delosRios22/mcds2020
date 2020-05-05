@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
-          <a href="{{ url('editor/articles/create') }}" class="btn btn-success">
+          <a href="{{ url('editor/create') }}" class="btn btn-success">
             <i class="fa fa-plus"></i> 
             Adicionar Articulo
           </a>
@@ -42,10 +42,10 @@
                         <a href="{{ url('editor/'.$article->id.'/edit') }}" class="btn btn-indigo btn-sm">
                           <i class="fa fa-pen"></i>
                         </a>
-                        <form action="{{url('articles/'.$article->id)}}" method="post" style="display: inline-block">
+                        <form action="{{url('editor/'.$article->id)}}" method="post" style="display: inline-block">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm btn-delete">
+                        <button type="button" class="btn btn-danger btn-sm btn-delete">
                         <i class="fa fa-trash"></i>
                         </button>
                         </form>

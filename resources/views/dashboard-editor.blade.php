@@ -15,7 +15,7 @@
         <div class="card"> 
           <img src="{{ asset('imgs/misarticulos.png') }}" class="card-img-top" height="240px">
           <div class="card-body"> 
-            <a href="{{ url('myarticles') }}" class="btn btn-indigo btn-block">Mis Articulos</a>
+            <a href="{{ url('editor/index') }}" class="btn btn-indigo btn-block">Mis Articulos</a>
           </div> 
         </div>
       </div>

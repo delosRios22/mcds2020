@@ -24,11 +24,11 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('home') }}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('myarticles') }}">Mis Articulos</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('editor/index') }}">Mis Articulos</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Adicionar Articulo</li>
               </ol>
             </nav>
-            <form action="{{ url('myarticles') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('editor') }}" method="post" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
                             <label for="name" class="text-md-right">Nombre Articulo</label>
