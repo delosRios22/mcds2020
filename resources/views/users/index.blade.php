@@ -9,7 +9,6 @@
             <i class="fa fa-plus"></i> 
             Adicionar Usuario
           </a>
-
           <a href="{{ url('generate/pdf/users') }}" class="btn btn-dark">
             <i class="fa fa-file-pdf"></i> 
             Generar PDF
@@ -27,7 +26,14 @@
             </button>
           </form>
           <br><br>
-          
+          <div class="form-inline">
+          @csrf
+          <input type="search" id="qsearch" name="qsearch" class="form-control" autocomplete="off" placeholder="Buscar...">
+          </div>
+          <br><br>
+            <div class="loading d-none text-center">
+              <img src="{{ asset('imgs/loading.gif')}}" width="100px">
+            </div>
             <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
@@ -37,7 +43,7 @@
                     <th>Acciones</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="users-content">
                   @foreach ($users as $user)
                     <tr>
                       <td>{{ $user->fullname }}</td>

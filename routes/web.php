@@ -42,6 +42,12 @@ Route::group(['middleware' => 'admin'], function(){
 	Route::resource('users', 'UserController');
 	Route::resource('categories', 'CategoryController');
 	Route::resource('articles', 'ArticleController');
+
+	
+	//Search AJX
+	Route::post('users/search', 'UserController@search');
+
+
 });
 
 
@@ -83,5 +89,5 @@ Route::get('editor/{id}/edit', 'ArticleController@eedit');
 Route::put('editor/{id}', 'ArticleController@eupdate');
 Route::delete('editor/{id}', 'ArticleController@edestroy');
 Route::get('generate/pdf/editor/articles', 'ArticleController@pdf');
- Route::get('generate/excel/editor/articles', 'ArticleController@excel');
+Route::get('generate/excel/editor/articles', 'ArticleController@excel');
 

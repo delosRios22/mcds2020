@@ -199,11 +199,29 @@
             // -----------------------------------------------
             $('.btn-excel').click(function(event){
                 $('#file').click();
-        });
+            });
 
             $("#file").change(function(){
                     $("#formImportar").submit();
                 });
+            
+                $('body').on('keyup', '#qsearch', function(event){
+                event.preventDefault();
+                $q= $(this).val();
+                $t= $('input[name=_token]').val();
+                $('.loading').removeClass('d-none');
+                $('.table').hide();
+                $sto= setTimeout(function(){
+                    clearTimeout($sto);
+                    $.post('users/search',
+                    {q: $q, _token: $t,},
+                    function(data){
+                        $('.loading').addClass('d-none');
+                        $('#users-content').html(data);
+                        $('.table').fadeIn('slow');
+                    });
+                },1400);
+            });
 
             });
 
@@ -211,6 +229,9 @@
                 event.preventDefault();
                 $cid = $(this).val();
             });
+
+            
+
     </script>
 </body>
 </html>

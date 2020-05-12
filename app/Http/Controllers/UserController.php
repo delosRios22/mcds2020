@@ -184,4 +184,9 @@ class UserController extends Controller
         }
     }
 
+    public function search(Request $request) {
+        $users = User::names($request->q)->orderBy('id', 'ASC')->paginate(10);
+        return view('users.search')->with('users', $users);
+    }
+
 }
