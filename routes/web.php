@@ -46,6 +46,7 @@ Route::group(['middleware' => 'admin'], function(){
 	
 	//Search AJX
 	Route::post('users/search', 'UserController@search');
+	Route::post('articles/search', 'ArticleController@search');
 
 
 });

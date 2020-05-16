@@ -227,4 +227,9 @@ class ArticleController extends Controller
             return redirect('editor/index')->with('message', 'El Articulo: '.$article->name.' fue eliminado con Exito!');
         }
     }
+
+    public function search(Request $request) {
+        $articles = Article::names($request->q)->orderBy('id', 'ASC')->paginate(10);
+        return view('articles.search')->with('articles', $articles);
+    }
 }

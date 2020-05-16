@@ -219,7 +219,25 @@
                         $('.loading').addClass('d-none');
                         $('#users-content').html(data);
                         $('.table').fadeIn('slow');
-                    });
+                    })
+                },1400);
+            });
+
+            $('body').on('keyup', '#qsearch', function(event){
+                event.preventDefault();
+                $q= $(this).val();
+                $t= $('input[name=_token]').val();
+                $('.loading').removeClass('d-none');
+                $('.table').hide();
+                $sto= setTimeout(function(){
+                    clearTimeout($sto);
+                    $.post('articles/search',
+                    {q: $q, _token: $t,},
+                    function(data){
+                        $('.loading').addClass('d-none');
+                        $('#articles-content').html(data);
+                        $('.table').fadeIn('slow');
+                    })
                 },1400);
             });
 

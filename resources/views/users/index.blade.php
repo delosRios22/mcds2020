@@ -28,8 +28,17 @@
           <br><br>
           <div class="form-inline">
           @csrf
-          <input type="search" id="qsearch" name="qsearch" class="form-control" autocomplete="off" placeholder="Buscar...">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+              </div>
+              <input type="search" id="qsearch" name="qsearch" class="form-control" placeholder="Buscar..." autocomplete="off">
+            </div>
           </div>
+          <!-- <div class="form-inline">
+          
+          <input type="search" id="qsearch" name="qsearch" class="form-control" autocomplete="off" placeholder="Buscar...">
+          </div> -->
           <br><br>
             <div class="loading d-none text-center">
               <img src="{{ asset('imgs/loading.gif')}}" width="100px">

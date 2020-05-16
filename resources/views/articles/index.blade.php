@@ -19,6 +19,19 @@
             Generar Excel
           </a>
           <br><br>
+          <div class="form-inline">
+          @csrf
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+              </div>
+              <input type="search" id="qsearch" name="qsearch" class="form-control" placeholder="Buscar..." autocomplete="off">
+            </div>
+          </div>
+          <br><br>
+          <div class="loading d-none text-center">
+              <img src="{{ asset('imgs/loading.gif')}}" width="100px">
+            </div>
           
             <table class="table table-striped table-bordered">
                 <thead>
@@ -29,7 +42,7 @@
                     <th>Acciones</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="articles-content">
                   @foreach ($articles as $article)
                     <tr>
                       <td>{{ $article->name }}</td>
